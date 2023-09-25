@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      >
+
+    <h:head>
+        <title>Mi página con PrimeFaces</title>
+        <!-- Required meta tags -->
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+        <!-- FONTAWESOME : https://kit.fontawesome.com/a23e6feb03.js -->
+        <link rel="stylesheet"   href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.  5/jquery.mCustomScrollbar.min.css"/>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+
+        <script src="icons.js"></script>
+
+        <title>Sidebar + Navbar</title>
+    </h:head>
+
+    <h:body>
+        <div class="wrapper">
+            <section>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                    <button id="sidebarCollapse" class="btn navbar-btn">
+                        <i class="fas fa-lg fa-bars"></i>
+                    </button>
+                    <a class="navbar-light" >
+                        <h3 id="logo">Sistema contable</h3>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"   data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"  aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" id="link" href="#">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    Cerrar sesion
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="link" href="#">
+                                    Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </section>
+            <div class="wrapper fixed-left" >
+                <section class="bg-dark">
+                    <nav id="sidebar" style="background-color:#D5D5D5 ; border: #333">
+                        <h2 style="text-align: center">MENU</h2>
+                        <h:form title="Menu" style="padding: 0"  >
+                            <p:menu  model="#{menuView.model}" toggleable="true" style="width: auto; color: #FF0000; font-weight: bold;text-align: left;padding: 0"/>
+                        </h:form>
+                    </nav>
+                </section>
+
+                <div id="content" style="padding-top: 70px; padding-left: 0;padding-right: 0" >
+                    <section class="blue" style="padding: 0">
+                        <p:panel id="includePanel" style="border: #333; padding: 0;">
+                            <ui:include src="#{menuView.currentPage}" />
+                        </p:panel>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="script.js"></script>
+    </h:body>
+</html>

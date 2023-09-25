@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title></title>
+    </h:head>
+    <h:body>
+        <h:form id="form" style="border: none; border-radius: none">
+            <p:outputLabel value="Detalle de persona" style="color: blue; font-size: 24px; font-weight: bold; text-align: right;" />
+            <p:tabView scrollable="true" >
+
+                <p:tab title="Busqueda" titleStyle="Title">
+                    <p:menubar>
+                        <p:menuitem value="Project" ajax="true"   action="#{personaBean.buscarPersona()}" icon="pi pi-search" />
+                        <p:menuitem value="Limpiar" ajax="true"   action="#{personaBean.limpiarBusqueda()}" icon="pi pi-trash"  />
+                    </p:menubar>
+                    <p:commandButton value="Buscar" ajax="true"   action="#{personaBean.buscarPersona()}" icon="pi pi-search" style="float: left;"/>
+                    <p:commandButton value="Limpiar" ajax="true"   action="#{personaBean.limpiarBusqueda()}" icon="pi pi-trash" style="float: left;"/>
+                    <p:panelGrid columns="4" layout="grid" id="pPerFG" style="align-content: stretch; border:white">
+                        <p:outputLabel for="primerNombre" value="Primer Nombre:"/>
+                        <p:inputText id="primerNombDre" value="#{personaBean.busPrimerNombre}" />
+                        <p:outputLabel for="segundoNombre" value="Segundo Nombre:" />
+                        <p:inputText id="segundoNomDbre" value="#{personaBean.busSegundoNombre}" />
+                        <p:outputLabel for="primerApellido" value="Primer Apellido:" />
+                        <p:inputText id="primerApellDido" value="#{personaBean.busPrimerApellido}" />
+                        <p:outputLabel for="segundoApellido" value="Segundo Apellido:" />
+                        <p:inputText id="segundoApelliDdo" value="#{personaBean.busSegundoApellido}" />
+                        <p:outputLabel for="fechaNacimiento" value="Fecha de Nacimiento:" />
+                        <p:calendar id="fechaNacimieDnto" value="#{personaBean.busFechaNacimiento}" pattern="dd/MM/yyyy" />
+                    </p:panelGrid> 
+                </p:tab>
+                <p:tab id="idtab"  title="Detalle"> 
+                    <p:commandButton value="Prueba" id="nuejklghvo"  ajax="true" action="#{personaBean.tres()}" update="form"  icon="pi pi-plus-circle" />
+                    <p:commandButton value="Nuevo" id="nuevo"  ajax="true" action="#{personaBean.nuevoRegistro()}" update="form"  icon="pi pi-plus-circle" disabled="#{personaBean.visible}"  />
+                    <p:commandButton value="Guardar" id="guardar" ajax="true" action="#{personaBean.guardarDatos}" update="dms"  icon="pi pi-save" disabled="#{!personaBean.visible}"  />
+                    <p:commandButton value="Limpiar" id="limpiar" ajax="true"  action="#{personaBean.limpiar()}"  update="form"  icon="pi pi-trash" disabled="#{!personaBean.visible}"/>
+                    <p:commandButton value="Imprimir" id="imprimir"  ajax="true" action="#{personaBean.llamar}" update="dms"  icon="pi pi-print" disabled="#{!personaBean.visible}"/>
+                    <p:panel id="dms" style="border: none; box-shadow: none;" visible="#{personaBean.visible}">
+                        <p:panelGrid columns="4"  layout="grid" styleClass="showcase-text-align-center" style="border:none">
+                            <p:outputLabel for="primerNombre" value="Primer Nombre:" styleClass="custom-input"/>
+                            <p:inputText id="primerNombre" value="#{personaBean.primerNombre}" />
+                            <p:outputLabel for="segundoNombre" value="Segundo Nombre:" />
+                            <p:inputText id="segundoNombre" value="#{personaBean.segundoNombre}" />
+                            <p:outputLabel for="primerApellido" value="Primer Apellido:" />
+                            <p:inputText id="primerApellido" value="#{personaBean.primerApellido}" />
+                            <p:outputLabel for="segundoApellido" value="Segundo Apellido:" />
+                            <p:inputText id="segundoApellido" value="#{personaBean.segundoApellido}" />
+                            <p:outputLabel for="fechaNacimiento" value="Fecha de Nacimiento:" />
+                            <p:calendar id="fechaNacimiento" value="#{personaBean.fechaNacimiento}" pattern="dd/MM/yyyy" />
+                        </p:panelGrid>
+                        <p:tabView id="uns" scrollable="true" style="border: none;" dynamic="true" activeIndex="#{personaBean.tabIndex}">
+                            <p:tab title="Correos" id="tab1">
+                                <div class="ui-g ui-fluid">
+                                    <div class="ui-g-12 ui-md-4">
+                                        <div class="ui-inputgroup">
+                                            <p:outputLabel for="@next" value="Tipo:" style="padding-right: 10px" />
+                                            <span class="ui-inputgroup-addon"><i class="pi pi-user"></i></span>                                             
+                                            <p:selectOneMenu id="console" value="#{personaBean.correosId}">
+                                                <f:selectItems value="#{personaBean.itemCorreosList}" />
+                                            </p:selectOneMenu>
+                                        </div>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-4">
+                                        <div class="ui-inputgroup">                                            
+                                            <p:outputLabel for="correop" value="Correo:" style="padding-right: 10px"/>
+                                            <span class="ui-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+                                            <p:inputText id="correop" value="#{personaBean.correo}" />
+                                        </div>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-4">
+                                        <div class="ui-inputgroup"> 
+                                            <p:commandButton value="agregar" action="#{personaBean.agregarCorreos()}" update="emailt" icon="pi pi-check" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 style="color: blue; font-size: 14px; font-weight: bold; text-align: left;margin-top:0">Correos de la persona</h3>
+                                <p:dataTable  id="emailt"
+                                              style="margin-bottom:20px;width: 30%;"
+                                              var="em" 
+                                              value="#{personaBean.lstEmail}" 
+                                              >
+                                    <p:column headerText="Tipo" style="width: 20%">
+                                        <h:outputText value="#{em.correlativos.descripcion}" />
+                                    </p:column>
+                                    <p:column headerText="Correo"  style="width: 50%">
+                                        <h:outputText value="#{em.email}" />
+                                    </p:column>
+
+                                </p:dataTable>
+                            </p:tab>
+                            <p:tab title="Telefonos" id="tab2">Telefonos Content</p:tab>
+                            <p:tab title="Direccion">direccion Content</p:tab>
+                            <p:tab title="Familiares">Familiares Content</p:tab>
+                            <p:tab title="Formacion academica">Formacion academica Content</p:tab>
+                            <p:tab title="Documentos">Documentos Content</p:tab>
+                        </p:tabView>
+                        <p:dialog 
+                            header="Iformacion" 
+                            widgetVar="dlg1"
+                            minHeight="40" width="50%" height="40%">
+                            <p:messages 
+                                id="messages"
+                                showDetail="true" closable="false">
+                                <p:autoUpdate />
+                            </p:messages>
+                        </p:dialog>
+                    </p:panel>
+                </p:tab>
+            </p:tabView>
+        </h:form>
+    </h:body>
+</html>
+

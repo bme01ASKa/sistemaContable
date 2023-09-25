@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Listar</title>
+    </h:head>
+    <f:view contentType="text/html" >
+        <h:form id="flistar" style="width: 100%">   
+            <p:outputLabel value="Listado de persona" style="color: blue; font-size: 24px; font-weight: bold; text-align: right;" />
+            <p:dialog 
+                header="Informacion" 
+                widgetVar="dlg1"
+                minHeight="40" width="50%" height="40%">
+                <p:messages 
+                    id="messages"
+                    showDetail="true" closable="false">
+                    <p:autoUpdate />
+                </p:messages>
+            </p:dialog>
+            <p:dialog 
+                header="Informacion de la persona" 
+                widgetVar="diaogoPersonaas"
+                height="350"
+                width="600">              
+                <p:panelGrid columns="2">
+                    <p:column headerText="TIpo de correos">
+                        <p:dataTable var="p" value="#{personaBean.selectedPersona.emailList}">
+                            <p:column headerText="Descripcion">
+                                <h:outputText value="#{p.correlativos.descripcion}" />
+                            </p:column>
+                            <p:column headerText="Correo">
+                                <h:outputText value="#{p.email}" />
+                            </p:column>
+                        </p:dataTable>
+                    </p:column>
+                    <p:column headerText="Idd">
+
+                    </p:column>
+                </p:panelGrid>
+            </p:dialog>
+            <p:tabView scrollable="true">
+                <p:tab title="LISTA DE PERSONAS" id="tvlista">
+                    <p:dataTable  id="singleDT" var="per" 
+                                  value="#{personaBean.lstPersonas}" 
+                                  paginator="true" 
+                                  rows="10"
+                                  selectionMode="single" selection="#{personaBean.selectedPersona}" 
+                                  rowKey="#{per.idPersonas}" 
+                                  >
+                        <f:facet name="header">Lista de personas</f:facet>
+                        <p:column headerText="Nombre" filterBy="#{per.PNombre}">
+                            <h:outputText value="#{per.PNombre} #{per.SNombre} #{per.PApellido} #{per.SApellido}" />
+                        </p:column>
+                        <p:column headerText="Fecha" filterBy="#{per.fchaNac}" >
+                            <h:outputText value="#{per.fchaNac}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column  headerText="Edad" filterBy="#{personaBean.calcularEdad(per.fchaNac)}">
+                            <h:outputText value="#{personaBean.calcularEdad(per.fchaNac)}" >
+                            </h:outputText>
+                        </p:column>
+
+                    </p:dataTable>
+                        <br></br>
+                        <p:commandButton value="Eliminar" ajax="true" update="@form"   action="#{personaBean.eliminar()}" icon="ui ui-icon-trash" style="padding-bottom: 5px"/>
+                        <p:commandButton value="Ver" ajax="true" update="flistar"   action="#{personaBean.mostrar()}" icon="ui ui-icon-search" style="padding-bottom: 5px"/>
+                </p:tab>
+            </p:tabView>
+        </h:form>
+    </f:view>
+</html>

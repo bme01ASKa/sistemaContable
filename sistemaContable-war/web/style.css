@@ -1,0 +1,65 @@
+.content {
+    padding: 10px;
+}
+
+
+/* Estilo para el menú lateral */
+#sidebar {
+    position: fixed;
+    left: -250px;
+    height: 100%;
+    width: 250px;
+    background-color: #333;
+    padding-top: 30px;
+    transition: all 0.3s;
+    margin-top: 40px;
+}
+
+#sidebar.active {
+    left: 0;
+}
+
+#sidebar .sidebar-header{
+    padding: 20px;
+    background: #6a76f8;
+}
+#dismiss {
+    color: #fff;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    cursor: pointer;
+}
+#logo {
+    display: inline-block;
+    margin-top: 7px;
+    color: #fff;
+}
+
+/* Estilo para el botón que muestra/oculta el menú */
+#sidebarCollapse {
+    color: #fff;
+    background: transparent;
+    outline: none;
+    margin: 0 20px;
+}
+/* Ajustar el contenido principal cuando se muestra el menú */
+#content {
+    padding: 40px;
+    min-height: 100vh;
+    transition: margin-left .3s;
+
+}
+
+#content.active {
+    margin-left: 250px;
+}
+
+#sidebar ul li a:hover {
+    color: #6240bd;
+    background: #fff;
+    text-decoration: none;
+}
+#sidebar .sidebar-header{
+    background: #6a76f8;
+}
